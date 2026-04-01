@@ -9,7 +9,7 @@ Xvfb :${DISPLAY_NUM} -screen 0 ${SCREEN_WIDTH:-1920}x${SCREEN_HEIGHT:-1080}x24 -
 sleep 1
 
 echo "[*] Starting x11vnc..."
-x11vnc -display :${DISPLAY_NUM} -forever -shared -listen 0.0.0.0 -port 5900 -nopw &
+x11vnc -display :${DISPLAY_NUM} -forever -shared -rfbport 5900 -nopw &
 sleep 1
 
 echo "[*] Starting noVNC..."

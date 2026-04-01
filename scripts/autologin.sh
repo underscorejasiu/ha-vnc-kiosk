@@ -16,7 +16,7 @@ fi
 sleep 5
 
 echo "[autologin] Typing username..."
-xdotool windowactivate --sync "$WID"
+xdotool windowfocus --sync "$WID"
 sleep 0.5
 xdotool type --clearmodifiers --delay 80 "${HA_USERNAME}"
 xdotool key Return
