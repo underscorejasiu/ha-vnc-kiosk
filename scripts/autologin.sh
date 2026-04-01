@@ -3,7 +3,7 @@ export DISPLAY=:${DISPLAY_NUM:-1}
 
 echo "[autologin] Waiting for Chromium..."
 for i in $(seq 1 40); do
-    WID=$(xdotool search --onlyvisible --class chromium 2>/dev/null | head -1)
+    WID=$(xdotool search --class chromium 2>/dev/null | head -1)
     [ -n "$WID" ] && break
     sleep 1
 done

@@ -16,18 +16,22 @@ echo "[*] Starting noVNC..."
 websockify --web /usr/share/novnc 6080 localhost:5900 &
 sleep 1
 
+echo "[*] Clearing Chromium profile locks..."
+rm -f /profile/SingletonLock /profile/SingletonSocket /profile/SingletonCookie
+
 echo "[*] Starting Chromium → ${HA_URL}"
 chromium \
     --no-sandbox \
     --disable-dev-shm-usage \
     --disable-gpu \
     --user-data-dir=/profile \
-    --window-size=${SCREEN_WIDTH:-1920},${SCREEN_HEIGHT:-1080} \
+    --window-size=${SCREEN_WIDTH:-1024},${SCREEN_HEIGHT:-600} \
     --start-fullscreen \
     --noerrdialogs \
     --disable-infobars \
     --disable-session-crashed-bubble \
     --disable-restore-session-state \
+    --ignore-profile-directory-lock \
     "${HA_URL:-http://homeassistant.local:8123}" &
 
 if [ -n "$HA_USERNAME" ] && [ -n "$HA_PASSWORD" ]; then
