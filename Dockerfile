@@ -4,12 +4,17 @@ ENV DEBIAN_FRONTEND=noninteractive
 
 RUN apt-get update && apt-get install -y \
     chromium \
-    x11vnc \
+    tigervnc-scraping-server \
     xvfb \
-    novnc \
+    openbox \
     websockify \
     xdotool \
+    git \
+    ca-certificates \
     && rm -rf /var/lib/apt/lists/*
+
+ARG NOVNC_VERSION=v0.5.1
+RUN git clone --branch $NOVNC_VERSION https://github.com/novnc/noVNC.git /opt/novnc
 
 COPY scripts/entrypoint.sh /usr/local/bin/entrypoint.sh
 COPY scripts/autologin.sh  /usr/local/bin/autologin.sh

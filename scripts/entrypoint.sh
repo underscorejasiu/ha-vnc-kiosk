@@ -1,19 +1,23 @@
 #!/bin/bash
 set -e
 
-DISPLAY_NUM=${DISPLAY_NUM:-1}
+DISPLAY_NUM=${DISPLAY_NUM:-0}
 export DISPLAY=:${DISPLAY_NUM}
 
 echo "[*] Starting Xvfb..."
-Xvfb :${DISPLAY_NUM} -screen 0 ${SCREEN_WIDTH:-1920}x${SCREEN_HEIGHT:-1080}x24 -ac &
+Xvfb :${DISPLAY_NUM} -screen 0 ${SCREEN_WIDTH:-1024}x${SCREEN_HEIGHT:-600}x24 -nolisten unix &
 sleep 1
 
-echo "[*] Starting x11vnc..."
-x11vnc -display :${DISPLAY_NUM} -forever -shared -rfbport 5900 -nopw &
+echo "[*] Starting Openbox..."
+openbox &
+sleep 1
+
+echo "[*] Starting TigerVNC..."
+x0vncserver -display :${DISPLAY_NUM} -SecurityTypes=None -rfbport 5900 &
 sleep 1
 
 echo "[*] Starting noVNC..."
-websockify --web /usr/share/novnc 6080 localhost:5900 &
+websockify --web=/opt/novnc 6080 localhost:5900 &
 sleep 1
 
 echo "[*] Clearing Chromium profile locks..."
@@ -24,6 +28,7 @@ chromium \
     --no-sandbox \
     --disable-dev-shm-usage \
     --disable-gpu \
+    --guest \
     --user-data-dir=/profile \
     --window-size=${SCREEN_WIDTH:-1024},${SCREEN_HEIGHT:-600} \
     --window-position=0,0 \
