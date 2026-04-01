@@ -38,6 +38,7 @@ chromium \
     --disable-session-crashed-bubble \
     --disable-restore-session-state \
     --ignore-profile-directory-lock \
+    --force-device-scale-factor=0.9 \
     "${HA_URL:-http://homeassistant.local:8123}" &
 
 if [ -n "$HA_USERNAME" ] && [ -n "$HA_PASSWORD" ]; then
