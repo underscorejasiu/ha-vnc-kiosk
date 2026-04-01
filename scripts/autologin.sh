@@ -21,11 +21,11 @@ if [ -z "$WID" ]; then
 fi
 
 echo "[autologin] Found window: $WID, waiting for page load..."
-sleep 8
+sleep 
 
 # Click center of screen to give Chromium input focus
-CX=$(( ${SCREEN_WIDTH:-1024} / 2 ))
-CY=$(( ${SCREEN_HEIGHT:-600} / 2 ))
+CX=$(( 20 ))
+CY=$(( 20 ))
 xdotool mousemove $CX $CY
 xdotool click 1
 sleep 8
