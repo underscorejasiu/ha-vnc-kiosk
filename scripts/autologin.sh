@@ -17,20 +17,25 @@ done
 
 if [ -z "$WID" ]; then
     echo "[autologin] ERROR: Chromium window not found after 60s"
-    echo "[autologin] All windows: $(xdotool search --name '' 2>/dev/null)"
     exit 1
 fi
 
-echo "[autologin] Found window: $WID"
-sleep 5
+echo "[autologin] Found window: $WID, waiting for page load..."
+sleep 8
+
+# Click center of screen to give Chromium input focus
+CX=$(( ${SCREEN_WIDTH:-1024} / 2 ))
+CY=$(( ${SCREEN_HEIGHT:-600} / 2 ))
+xdotool mousemove $CX $CY
+xdotool click 1
+sleep 8
 
 echo "[autologin] Typing username..."
-xdotool windowfocus --sync "$WID"
-sleep 0.5
 xdotool type --clearmodifiers --delay 80 "${HA_USERNAME}"
 xdotool key Return
 
-sleep 3
+echo "[autologin] Waiting for password field..."
+sleep 8
 
 echo "[autologin] Typing password..."
 xdotool type --clearmodifiers --delay 80 "${HA_PASSWORD}"
