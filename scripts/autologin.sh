@@ -28,7 +28,7 @@ CX=$(( 20 ))
 CY=$(( 20 ))
 xdotool mousemove $CX $CY
 xdotool click 1
-sleep 8
+sleep 2
 
 xdotool key Tab
 echo "[autologin] Typing username..."
@@ -37,7 +37,7 @@ xdotool type --clearmodifiers --delay 80 "${HA_USERNAME}"
 xdotool key Tab
 
 echo "[autologin] Waiting for password field..."
-sleep 8
+sleep 2
 
 echo "[autologin] Typing password..."
 xdotool type --clearmodifiers --delay 80 "${HA_PASSWORD}"
