@@ -26,7 +26,8 @@ chromium \
     --disable-gpu \
     --user-data-dir=/profile \
     --window-size=${SCREEN_WIDTH:-1024},${SCREEN_HEIGHT:-600} \
-    --start-fullscreen \
+    --window-position=0,0 \
+    --kiosk \
     --noerrdialogs \
     --disable-infobars \
     --disable-session-crashed-bubble \
