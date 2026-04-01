@@ -16,6 +16,7 @@ RUN apt-get update && apt-get install -y \
 ARG NOVNC_VERSION=v0.5.1
 RUN git clone --branch $NOVNC_VERSION https://github.com/novnc/noVNC.git /opt/novnc
 
+COPY index.html /opt/novnc/index.html
 COPY scripts/entrypoint.sh /usr/local/bin/entrypoint.sh
 COPY scripts/autologin.sh  /usr/local/bin/autologin.sh
 RUN chmod +x /usr/local/bin/entrypoint.sh /usr/local/bin/autologin.sh
